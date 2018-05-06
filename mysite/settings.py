@@ -25,8 +25,14 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
 
+||||||| merged common ancestors
+ALLOWED_HOSTS = ['67.205.185.115', 'imtwitter.mdevstix.com']
+
+=======
+>>>>>>> a466df7d844dbfdc7164cd3bb8acdd25db175425
 
 # Application definition
 
