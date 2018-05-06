@@ -20,19 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = []
 
-||||||| merged common ancestors
-ALLOWED_HOSTS = ['67.205.185.115', 'imtwitter.mdevstix.com']
-
-=======
->>>>>>> a466df7d844dbfdc7164cd3bb8acdd25db175425
+SECRET_KEY = 'a4!mi8ipztlio!!-jbqj3bjo!mi8ipztlio!!-jbqj3bjo0e4$'
 
 # Application definition
 
@@ -84,8 +78,15 @@ LOGOUT_REDIRECT_URL = 'home'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'imtwitter',
+            'USER': 'postgres',
+            'PASSWORD': 'django1234',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -126,3 +127,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
