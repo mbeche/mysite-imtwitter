@@ -56,27 +56,23 @@ def search_text(request):
         numposts = len(results)
         posts = results
         return render (request,"posts.html",{'posts':posts,'query':q, 'numposts':numposts})
-    # if 'q' in request.GET['q']:
-    #     posts = Post.objects.filter(post_text__icontains=q)
-    #     return render(request, 'posts.html', {'posts': posts, 'q':q})
-    # posts = Post.objects.all()
-    # # return render(request, 'posts.html', {'posts': posts, 'q':q})
     elif len(q) == 1:
-        res = 2 #search length of 1 seems not to be working
+        res = 2
         return render (request,"posts.html",{'posts': posts, 'query':q, 'res':res})
     else:
         noposts = 1
         return render (request,"posts.html",{'posts': posts, 'query':q, 'noposts':noposts})
-    # model = Post
-    # posts = Post.objects.all()
-    # else:
-    #     print(':( :( :(')
 
 @login_required
 def view_sort(request, username):
     posts = Post.objects.filter(user__username=str(username))
     length = len(posts)
-    return render(request, 'posts.html', {'posts': posts, 'username':username, 'length':length})
+    if length > 0:
+        return render(request, 'posts.html', {'posts': posts, 'username':username, 'length':length})
+    else:
+        posts = Post.objects.all().order_by('-pud_date')
+        message = "The user you are looking for does not exist or does not have any posts."
+        return render (request,"posts.html",{'posts': posts, 'message':message})
 
 # class CreateMyModelView(CreateView):
 #     model = MyModel
