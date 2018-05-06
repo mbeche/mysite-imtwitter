@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="w-100 row justify-content-center pt-3 m-0">
+  <div class="posts sort row">
+    <div class="col-md-9 col-12">
+      <h3 id="mostrecent" class="mt-2 align-bottom">
+        {% if message %}{{ message }} Here are posts from all users:
+        {% elif length == 1 %}There is <em><strong>{{ length }} post</strong></em> that contains <strong>"{{ query }}"</strong>
+        {% elif results %}There are <em><strong>{{ length }} posts</strong></em> that contain <strong>"{{ query }}"</strong>
+        {% elif noposts %}There are <em><strong>0 posts</strong></em> that contain <strong>"{{ query }}".</strong> Here are posts from all users:
+        {% else %} Posts from {{ username }}:{% endif %}
+      </h3>
+    </div>
+    <div class="col-md-3 col-12">
+      <div class="row justify-content-center">
+        <a href="{% url 'add_post' %}" class="{% if message %}mt-4{% else %}mt-2{% endif %} justify-content-center" style="text-decoration: none;">
+          <button class="center text-white btn btn-primary">New Post</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card p-0 mt-3 posts" style="background-color:#f0f2f4;">
+{% if length == 0 %}
+<div class="pl-5 pr-5 pb-5 pt-0">
+  <div class="p-0 .text-nowrap" style="white-space: nowrap;">
+    <div class="d.inline-block w-25 float-left">
+      <img class="img-fluid d.inline-block p-0" style="transform: scaleX(-1)" src="{% static "rainbow-right.png" %}" alt="raindow">
+    </div>
+    <div class="float-left text-center w-50 p-0" style="white-space: normal; transform: translateY(-30px)"><h3 class="card-title"><br><br><strong>¯\_('O')_/¯</strong>
+      <h4><br>You don't have any posts yet!</h4>
+      <br><a href="{% url 'add_post' %}" class="justify-content-center" style="text-decoration: none;"><button class="center text-white btn-lg btn-primary">Create First Post</button></a>
+    </div>
+    <div class="d.inline-block w-25 p-0 float-right">
+      <img class="img-fluid d.inline-block p-0" src="{% static "rainbow-right.png" %}" alt="raindow">
+    </div>
+  </div>
+  <img class="img-fluid border border-success rounded" src="{% static "goat.jpg" %}" alt="billy the goat">
+</div>
+  </div>
+</div>
+{% else %}
+{% for post in posts %}
+    <div id="post{{ post.pk }}" class="card-body">
+  {% if post.user == request.user %}
+      <div class="clearfix pb-3 text-right">
+        <span class="font-italic text-muted">As the poster you may:</span>
+        <a href="{% url 'edit_post' pk=post.pk %}"><button class="btn btn-success ml-3 mb-2">Edit Post</button></a>
+        <a href="{% url 'delete_post' pk=post.pk %}"><button class="btn btn-danger ml-3 mb-2">Delete Post</button></a>
+      </div>
+  {% endif %}
+      <!-- <p>{{ author }}</p> -->
+      <h5 class="card-title">Posted by <a href="{% url 'view_sort' username=post.user %}"><strong>{{ post.user }}</strong></a> <span class="font-italic small mb-2 text-muted">on {{ post.pud_date }}</span></h5>
+      <p class="card-text">{{ post.post_text }}</p>
+    </div>
+    <div class="row justify-content-center">
+      <a href="{% url 'add_comment_to_post' pk=post.pk %}"><button class="center btn btn-primary">Add comment</button></a>
+    </div>
+    <div class="row justify-content-center">
+  {% for comment in post.comment_set.all %}
+      <div id="comment{{ comment.pk }}" class="card p-0 m-3" style="width: 80%; background-color:#F8F9FA;">
+        <div class="card-body">
+    {% if comment.user == request.user %}
+          <div class="clearfix pb-3 text-right">
+            <span class="font-italic text-muted">As the poster you may:</span>
+            <a href="{% url 'edit_comment' pk=comment.pk %}"><button class="btn btn-success ml-3 mb-2">Edit Comment</button></a>
+            <a href="{% url 'delete_comment' pk=comment.pk %}"><button class="btn btn-danger ml-3 mb-2">Delete Comment</button></a>
+          </div>
+    {% endif %}
+          <h5 class="card-title">Reply by <a href="{% url 'view_sort' username=comment.user %}"><strong>{{ comment.user }}</strong></a><span class="font-italic small mb-2 text-muted"> on {{ comment.pub_date }}</span></h5>
+          <p class="card-text">{{ comment.comment_text }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <hr>
+{% endfor %}
+{% endif %}
+<div class="pl-5 pr-5 pb-5 pt-0">
+  <div class="p-0 .text-nowrap" style="white-space: nowrap;">
+    <div class="d.inline-block w-25 float-left">
+      <img class="img-fluid d.inline-block p-0" style="transform: scaleX(-1)" src="{% static "rainbow-right.png" %}" alt="raindow">
+    </div>
+    <div class="float-left text-center w-50 p-0" style="white-space: normal;"><br>¯\_(ツ)_/¯<br><br>End of post list - I'm going to go lie down in the sun with my friend billy.</div>
+    <div class="d.inline-block w-25 p-0 float-right">
+      <img class="img-fluid d.inline-block p-0" src="{% static "rainbow-right.png" %}" alt="raindow">
+    </div>
+  </div>
+  <img class="img-fluid border border-success rounded" src="{% static "goat.jpg" %}" alt="billy the goat">
+</div>
+</div>
+</div>
+{% endblock %}

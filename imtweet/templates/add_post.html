@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-3">
+  {% with url_name=request.resolver_match.url_name %}
+  {% if url_name == 'add_post' %}
+  <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+    <h1 class="display-4">we're all ears!</h1>
+    <p class="lead"><strong>{{ user }}</strong>, what would you like to share?</p>
+    <form method="POST" class="post-form">{% csrf_token %}
+      <span class="text-black-50"><em>Character Limit: 140</em></span>
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default text-white"  style="background-color:#1F7A8C;">Send</button>
+    </form><br>
+    <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
+  </div>
+  {% endif %}
+  {% if url_name == 'edit_post' %}
+  <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+    <h1 class="display-4">edit post</h1>
+    <p class="lead"><strong>{{ user }}</strong>, how would you like to chage this?</p>
+    <form method="POST" class="post-form">{% csrf_token %}
+      <span class="text-black-50"><em>Character Limit: 140</em></span>
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default text-white"  style="background-color:#1F7A8C;">Edit</button>
+    </form><br>
+    <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
+  </div>
+  {% endif %}
+  {% if url_name == 'delete_post' %}
+  <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+    <h1 class="display-4">delete?</h1>
+    <p class="lead"><strong>{{ user }}</strong>, you are about to delete your post. Are you sure you want to do this?</p>
+    <form method="POST" class="post-form">{% csrf_token %}
+      <div class="card p-0 m-3" style="width: 80%; background-color:#F8F9FA;">
+        <div class="card-body">
+          <h5 class="card-title">Post by <strong>{{ post.user }}</strong> <span class="font-italic small mb-2 text-muted">on {{ post.pud_date }}</span></h5>
+          <p class="card-text">{{ post }}</p>
+        </div>
+      </div>
+      <button type="submit" class="save btn btn-danger text-white">Delete</button>
+    </form><br>
+    <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
+  </div>
+  {% endif %}
+  {% endwith %}
+  {% endblock %}

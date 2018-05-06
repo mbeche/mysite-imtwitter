@@ -1,0 +1,130 @@
+.{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="w-100 p-3 m-0 row justify-content-center">
+  <div class="pt-4 pr-0 pl-0 col-12 col-sm-11 col-md-10">
+    <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+      <h1 class="display-4"><span style="word-wrap: break-word;">Welcome to your Dashboard, {{ user }}!</span></h1>
+      <p class="lead align-bottom">This is a simple little post & comment app. Give it a spin. <span class="visible-desktop">Here's some tips:</span></p>
+      <hr class="my-0 mb-2" style="position:relative; bottom:5px;">
+      <div class="visible-phone text-center">
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#suggestions" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Click here for suggestions!
+          </a>
+        </p>
+        <div class="collapse" id="suggestions">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="text-center col-12 col-md-1 text-right"><h4><i class="far fa-thumbs-up"></i></h4></div>
+                <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Like what a user has to say? Click their name to see all their posts.</span><br></div>
+              </div>
+              <div class="row">
+                <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-comments"></i></h4></div>
+                <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">New to IMTwitter? Create a post to say hello.</span><br></div>
+              </div>
+              <div class="row">
+                <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-paw"></i></h4></div>
+                <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Have a cute animal pic that needs to be shared? We're happy to have it.</span><br></div>
+              </div>
+              <div class="row">
+                <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-reply"></i></h4></div>
+                <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Stricken with the wittiest of retorts? Give 'em a comment.</span><br></div>
+              </div>
+              <div class="row">
+                <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-question-circle"></i></h4></div>
+                <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Need help or want to know more about how this app was developed? See my <a href="{% url 'about' %}">About</a> page.</span><br></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="visible-desktop">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="text-center col-12 col-md-1 text-right"><h4><i class="far fa-thumbs-up"></i></h4></div>
+              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Like what a user has to say? Click their name to see all their posts.</span><br></div>
+            </div>
+            <div class="row">
+              <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-comments"></i></h4></div>
+              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">New to IMTwitter? Create a post to say hello.</span><br></div>
+            </div>
+            <div class="row">
+              <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-paw"></i></h4></div>
+              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Have a cute animal pic that needs to be shared? We're happy to have it.</span><br></div>
+            </div>
+            <div class="row">
+              <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-reply"></i></h4></div>
+              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Stricken with the wittiest of retorts? Give 'em a comment.</span><br></div>
+            </div>
+            <div class="row">
+              <div class="text-center col-12 col-md-1 text-right"><h4><i class="fas fa-question-circle"></i></h4></div>
+              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">Need help or want to know more about how this app was developed? See my <a href="{% url 'about' %}">About</a> page.</span><br></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="lead mt-3"><em>The IMTwitter world is your oyster!</em></p>
+    </div>
+  </div>
+</div>
+<div class="w-100 m-0 row justify-content-center">
+  <div class="posts">
+        <h3 id="mostrecent" class="align-bottom float-left">Most recent posts:</h3>
+        <a href="{% url 'add_post' %}" class="float-right justify-content-center" style="text-decoration: none;"><button class="center text-white btn btn-primary">New Post</button></a>
+  </div>
+  <div class="card p-0 m-3 posts" style="background-color:#f0f2f4;">
+{% for post in posts %}
+    <div id="post{{ post.pk }}" class="card-body">
+      {% if post.user == request.user %}
+      <div class="clearfix pb-3 text-right">
+        <span class="font-italic text-muted">As the poster you may:</span>
+        <a href="{% url 'edit_post' pk=post.pk %}"><button class="btn btn-success ml-3 mb-2">Edit Post</button></a>
+        <a href="{% url 'delete_post' pk=post.pk %}"><button class="btn btn-danger ml-3 mb-2">Delete Post</button></a>
+      </div>
+      {% endif %}
+      <h5 class="card-title">Posted by <a href="{% url 'view_sort' username=post.user %}"><strong>{{ post.user }}</strong></a> <span class="font-italic small mb-2 text-muted">on {{ post.pud_date }}</span></h5>
+      <p class="card-text">{{ post.post_text }}</p>
+    </div>
+    <div class="row justify-content-center">
+      <a href="{% url 'add_comment_to_post' pk=post.pk %}"><button class="center btn btn-primary">Add comment</button></a>
+    </div>
+    <div class="row justify-content-center">
+    {% for comment in post.comment_set.all %}
+      <div id="comment{{ comment.pk }}" class="card p-0 m-3" style="width: 85%; background-color:#F8F9FA;">
+        <div class="card-body">
+          {% if comment.user == request.user %}
+          <div class="clearfix pb-3 text-right">
+            <span class="font-italic text-muted">As the poster you may:</span>
+            <a href="{% url 'edit_comment' pk=comment.pk %}"><button class="btn btn-success ml-3 mb-2">Edit Comment</button></a>
+            <a href="{% url 'delete_comment' pk=comment.pk %}"><button class="btn btn-danger ml-3 mb-2">Delete Comment</button></a>
+          </div>
+          {% endif %}
+          <h5 class="card-title">Reply by <a href="{% url 'view_sort' username=comment.user %}"><strong>{{ comment.user }}</strong></a> <span class="font-italic small mb-2 text-muted">on {{ comment.pub_date }}</span></h5>
+          <p class="card-text">{{ comment.comment_text }}</p>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+  <hr>
+{% endfor %}
+<div class="pl-5 pr-5 pb-5 pt-0">
+  <div class="p-0 .text-nowrap" style="white-space: nowrap;">
+    <div class="d.inline-block w-25 float-left">
+      <img class="img-fluid d.inline-block p-0" style="transform: scaleX(-1)" src="{% static "rainbow-right.png" %}" alt="raindow">
+    </div>
+    <div class="float-left text-center w-50 p-0" style="white-space: normal;"><br>¯\_(ツ)_/¯<br><br>End of post list - I'm going to go lie down in the sun with my friend billy.</div>
+    <div class="d.inline-block w-25 p-0 float-right">
+      <img class="img-fluid d.inline-block p-0" src="{% static "rainbow-right.png" %}" alt="raindow">
+    </div>
+  </div>
+  <img class="img-fluid border border-success rounded" src="{% static "goat.jpg" %}" alt="billy the goat">
+</div>
+  </div>
+</div>
+{% endblock %}

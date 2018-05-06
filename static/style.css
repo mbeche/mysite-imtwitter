@@ -1,0 +1,15 @@
+@media only screen and (min-width: 600px) {
+  .main-container {margin-top: 3rem;}
+  .posts {width: 80%; }
+  .visible-phone {display: none;}
+}
+
+@media only screen and (max-width: 600px){
+  html, body {font-size: 18px;}
+  h1, .display-4 {font-size: 2rem;}
+  .main-container {margin-top: 0.75rem;}
+  .posts {width: 90%;}
+  .sort {margin-top: 2rem;}
+  #mostrecent {font-size:1.2rem;}
+  .visible-desktop {display: none;}
+}

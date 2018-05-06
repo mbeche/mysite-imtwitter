@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="sort p-3 row justify-content-center">
+  <div class="pt-4 col-12 col-sm-11 col-md-10">
+    <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+      <h1 class="display-4">Sign Up</h1>
+      <p class="lead">  <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </p>
+    <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
+  </div>
+</div>
+</div>
+{% endblock %}
