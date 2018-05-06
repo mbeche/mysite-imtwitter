@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="p-3">
+<div class="sort p-3">
   {% with url_name=request.resolver_match.url_name %}
   {% if url_name == 'add_post' %}
   <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
