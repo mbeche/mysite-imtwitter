@@ -7,7 +7,15 @@
   <div class="sort pt-4 col-12 col-sm-11 col-md-10">
     <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
       <h1 class="display-4">Sign Up</h1>
-      <p class="lead">  <form method="post">
+      <p class="lead">
+        <div class="">
+          <strong><em>Attention:</em></strong>
+        </div>
+        <div class="">
+          <span style="font-size: 14px; line-height: 14px;">This site currently uses TLS/SSL so everything is transmitted as plain text. For security reasons, this is why I do not requrest any personal information like email addresses, etc. Keep this in mind while creating login information and enjoying this website :)
+        </div>
+        <br>
+        <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Sign Up</button>
