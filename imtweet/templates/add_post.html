@@ -4,7 +4,7 @@
 <div class="sort p-3">
   {% with url_name=request.resolver_match.url_name %}
   {% if url_name == 'add_post' %}
-  <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+  <div class="sort jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
     <h1 class="display-4">we're all ears!</h1>
     <p class="lead"><strong>{{ user }}</strong>, what would you like to share?</p>
     <form method="POST" class="post-form">{% csrf_token %}
@@ -16,7 +16,7 @@
   </div>
   {% endif %}
   {% if url_name == 'edit_post' %}
-  <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+  <div class="sort jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
     <h1 class="display-4">edit post</h1>
     <p class="lead"><strong>{{ user }}</strong>, how would you like to chage this?</p>
     <form method="POST" class="post-form">{% csrf_token %}
@@ -28,7 +28,7 @@
   </div>
   {% endif %}
   {% if url_name == 'delete_post' %}
-  <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
+  <div class="sort jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
     <h1 class="display-4">delete?</h1>
     <p class="lead"><strong>{{ user }}</strong>, you are about to delete your post. Are you sure you want to do this?</p>
     <form method="POST" class="post-form">{% csrf_token %}
