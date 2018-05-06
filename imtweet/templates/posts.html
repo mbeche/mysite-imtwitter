@@ -9,8 +9,8 @@
     <div class="col-md-9 col-12">
       <h3 id="mostrecent" class="mt-2 align-bottom">
         {% if message %}{{ message }} Here are posts from all users:
-        {% elif length == 1 %}There is <em><strong>{{ length }} post</strong></em> that contains <strong>"{{ query }}"</strong>
-        {% elif results %}There are <em><strong>{{ length }} posts</strong></em> that contain <strong>"{{ query }}"</strong>
+        {% elif numposts == 1 %}There is <em><strong>{{ numposts }} post</strong></em> that contains <strong>"{{ query }}"</strong>
+        {% elif numposts > 2 %}There are <em><strong>{{ numposts }} posts</strong></em> that contain <strong>"{{ query }}"</strong>
         {% elif noposts %}There are <em><strong>0 posts</strong></em> that contain <strong>"{{ query }}".</strong> Here are posts from all users:
         {% else %} Posts from {{ username }}:{% endif %}
       </h3>

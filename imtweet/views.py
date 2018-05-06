@@ -44,17 +44,18 @@ def dashboard(request):
 #             qs = qs.annotate(rank=SearchRank(vector, query)).order_by('-rank')
 #         return qs
 
+@login_required
 def search_text(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-pud_date')
     q = request.GET['q']
-    results = Post.objects.filter(post_text__icontains=q)
+    results = Post.objects.filter(post_text__icontains=q).order_by('-pud_date')
     if q == '':
         message ='You submitted an empty search!'
         return render (request,"posts.html",{'posts': posts, 'message':message})
     elif len(results) != 0:
-        length = len(results)
+        numposts = len(results)
         posts = results
-        return render (request,"posts.html",{'posts':posts,'query':q, 'length':length})
+        return render (request,"posts.html",{'posts':posts,'query':q, 'numposts':numposts})
     # if 'q' in request.GET['q']:
     #     posts = Post.objects.filter(post_text__icontains=q)
     #     return render(request, 'posts.html', {'posts': posts, 'q':q})
@@ -71,6 +72,7 @@ def search_text(request):
     # else:
     #     print(':( :( :(')
 
+@login_required
 def view_sort(request, username):
     posts = Post.objects.filter(user__username=str(username))
     length = len(posts)
@@ -128,7 +130,9 @@ def edit_post(request, pk):
             form = PostForm(instance=post)
         return render(request, 'add_post.html', {'form': form, 'post': post})
     else:
-        return HttpResponse("You do not have permission to edit this post.")
+        posts = Post.objects.all().order_by('-pud_date')
+        message = "Oops! You do not have permission to edit this post."
+        return render (request,"posts.html",{'posts': posts, 'message':message})
 
 @login_required
 def delete_post(request, pk):
@@ -142,7 +146,9 @@ def delete_post(request, pk):
             form = PostForm(instance=post)
         return render(request, 'add_post.html', {'form': form, 'post': post})
     else:
-        return HttpResponse("You do not have permission to delete this post.")
+        posts = Post.objects.all().order_by('-pud_date')
+        message = "Oops! You do not have permission to delete this post."
+        return render (request,"posts.html",{'posts': posts, 'message':message})
 
 @login_required
 def delete_comment(request, pk):
@@ -156,7 +162,9 @@ def delete_comment(request, pk):
             form = CommentForm(instance=comment)
         return render(request, 'add_comment_to_post.html', {'form': form, 'comment': comment})
     else:
-        return HttpResponse("You do not have permission to delete this post.")
+        posts = Post.objects.all().order_by('-pud_date')
+        message = "Oops! You do not have permission to delete this comment."
+        return render (request,"posts.html",{'posts': posts, 'message':message})
 
 @login_required
 def edit_comment(request, pk):
@@ -171,4 +179,6 @@ def edit_comment(request, pk):
             form = CommentForm(instance=comment)
         return render(request, 'add_comment_to_post.html', {'form': form, 'comment': comment})
     else:
-        return HttpResponse("You do not have permission to edit this comment.")
+        posts = Post.objects.all().order_by('-pud_date')
+        message = "Oops! You do not have permission to edit this comment."
+        return render (request,"posts.html",{'posts': posts, 'message':message})
