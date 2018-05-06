@@ -78,14 +78,6 @@ LOGOUT_REDIRECT_URL = 'home'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pseudoproject',
-        'USER': 'userhandlermypy',
-        'PASSWORD': 'staticint8932',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
 }
 
 
