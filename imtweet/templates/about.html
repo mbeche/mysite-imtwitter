@@ -3,8 +3,8 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
-<div class="sort w-100 p-3 row justify-content-center">
-  <div class="pt-4 col-12 col-sm-11 col-md-10">
+<div class="w-100 p-3 m-0 row justify-content-center">
+  <div class="sort pt-4 col-12 col-sm-11 col-md-10">
     <div class="jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
       <img class="img-fluid border border-primary rounded float-right w-25" src="{% static "johnson_michael.jpg" %}" alt="billy the goat">
       <h1 class="display-4">Hello <strong>{{ user }}</strong>!<br>I'm Michael, the creator of this app.</h1>
@@ -28,44 +28,50 @@
         <div class="row">
           <div class="col-12">
             <div class="row">
-              <div class="text-center col-12 col-md-1 text-right"><h4>
+              <div class="text-center col-1 text-right"><h4>
                 <i class="fab fa-github"></i>
               </h4></div>
-              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">
-                <a href="https://github.com/mbeche">GitHub</a> (this project is in the repository <a href="https://github.com/mbeche/IMTwitter">IMTwitter</a>)</a>
+              <div class="col-11 text-left mb-2"><span class="align-middle">
+                <a href="https://github.com/mbeche">GitHub</a> (this project is in the repository <a href="https://github.com/mbeche/mysite-imtwitter">IMTwitter</a>)
               </span><br></div>
             </div>
             <div class="row">
-              <div class="text-center col-12 col-md-1 text-right"><h4>
+              <div class="text-center col-1 text-right"><h4>
                 <i class="fab fa-linkedin-in"></i>
               </h4></div>
-              <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">
+              <div class="col-11 text-left mb-2"><span class="align-middle">
                 <a href="https://www.linkedin.com/in/mbjohnsonche/">LinkedIn</a></br>
               </span></div>
             </div>
             <div class="row">
-            <div class="text-center col-12 col-md-1 text-right"><h4>
-              <i class="fab fa-twitter"> </i>
-            </h4></div>
-            <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">
-               <a href="https://twitter.com/mDevStix">Twitter</a>
-            </span><br></div>
+              <div class="text-center col-1 text-right"><h4>
+                <i class="fab fa-twitter"> </i>
+              </h4></div>
+              <div class="col-11 text-left mb-2"><span class="align-middle">
+                <a href="https://twitter.com/mDevStix">Twitter</a>
+              </span><br></div>
+            </div>
+            <div class="row">
+              <div class="text-center col-1 text-right"><h4>
+                <i class="fas fa-user-circle"> </i>
+              </h4></div>
+              <div class="col-11 text-left mb-2"><span class="align-middle">
+                <a href="https://mbeche.github.io/">Portfolio</a>
+              </span><br></div>
+            </div>
+            <div class="row">
+              <div class="text-center col-1 text-right"><h4>
+                <i class="far fa-envelope"></i>
+              </h4></div>
+              <div class="col-11 text-left mb-2"><span class="align-middle">
+                <a href="mailto:mb.johnsonbece@gmail.com">Email</a>
+              </span><br></div>
+            </div>
           </div>
-          <div class="row">
-            <div class="text-center col-12 col-md-1 text-right"><h4>
-              <i class="fas fa-user-circle"> </i>
-            </h4></div>
-            <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">
-              <a href="https://mbeche.github.io/">Portfolio</a>
-            </span><br></div>
-          </div>
-          <div class="row">
-            <div class="text-center col-12 col-md-1 text-right"><h4>
-              <i class="far fa-envelope"></i>
-            </h4></div>
-            <div class="col-12 col-md-11 text-left mb-2"><span class="align-middle">
-              <a href="mailto:mb.johnsonbece@gmail.com">Email</a>
-            </span><br></div>
-          </div>
+        </div>
       </div>
+      {% if user.is_authenticated %} {% else %} <p class="lead">For more information, please <a href="{% url 'login' %}">create an account</a> or <a href="{% url 'login' %}">log in</a>.</p> {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}
