@@ -16,7 +16,7 @@
       <form method="POST" class="post-form">{% csrf_token %}
         <span class="text-black-50"><em>Character Limit: 140</em></span>
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default text-white"  style="background-color:#1F7A8C;">Send</button>
+        <button type="submit" class="save btn btn-default text-white">Send Comment</button>
       </form><br>
       <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
     </div>
@@ -28,8 +28,7 @@
       <form method="POST" class="post-form">{% csrf_token %}
         <span class="text-black-50"><em>Character Limit: 140</em></span>
         {{ form.as_p }}
-        {{ comment }}
-        <button type="submit" class="save btn btn-default text-white"  style="background-color:#1F7A8C;">Send</button>
+        <button type="submit" class="save btn btn-success text-white">Submit Edit</button>
       </form><br>
       <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
     </div>
@@ -45,7 +44,7 @@
         </div>
       </div>
       <form method="POST" class="post-form">{% csrf_token %}
-        <button type="submit" class="save btn btn-danger text-white">Delete</button>
+        <button type="submit" class="save btn btn-danger text-white">Delete Comment</button>
       </form>
       <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
     </div>
