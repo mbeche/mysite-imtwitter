@@ -2,6 +2,8 @@
 
 {% block content %}
 <div class="sort p-3">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-6">
   {% with url_name=request.resolver_match.url_name %}
   {% if url_name == 'add_post' %}
   <div class="sort jumbotron pt-2 pb-2" style="background-color: #f0f2f4">
@@ -10,7 +12,7 @@
     <form method="POST" class="post-form">{% csrf_token %}
       <span class="text-black-50"><em>Character Limit: 140</em></span>
       {{ form.as_p }}
-      <button type="submit" class="save btn btn-default text-white">Send Post</button>
+      <button type="submit" class="save btn btn-primary text-white">Send Post</button>
     </form><br>
     <p class="lead"><em>The IMTwitter world is your oyster!</em></p>
   </div>
@@ -44,4 +46,6 @@
   </div>
   {% endif %}
   {% endwith %}
+</div>
+</div>
   {% endblock %}
