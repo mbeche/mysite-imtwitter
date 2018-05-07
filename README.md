@@ -1,6 +1,6 @@
 # mysite-imtwitter
 ### This is v2 created for deployment, you can [checkout v1](https://github.com/mbeche/imtwitter-django-app) with previous commits
-##Live site: [IMTwitter](https://imtwitter.mdevstix.com)
+## Live site: [IMTwitter](https://imtwitter.mdevstix.com)
 
 This is a project assigned as the finals steps of an interview for a Python/JavaScript position.
 
