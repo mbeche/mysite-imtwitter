@@ -9,6 +9,7 @@
       <img class="img-fluid border border-primary rounded float-right w-25" src="{% static "johnson_michael.jpg" %}" alt="billy the goat">
       <h1 class="display-4">Hello <strong>{{ user }}</strong>!<br>I'm Michael, the creator of this app.</h1>
       <p class="lead align-bottom">I created this app as part of an interview process with an insurance company in Des Moines, IA. The assignment was to create a Twitter-like app.</p>
+      {% if user.is_authenticated %} <p class="lead">For more information on my process, read <a href="http://mbeche.github.io/imt/app-reflection.html">this reflection</a> on developing this app.</p>  {% else %}{% endif %}
       <div class="container">
         The features included on this site are:
         <ul>
@@ -70,7 +71,7 @@
           </div>
         </div>
       </div>
-      {% if user.is_authenticated %} {% else %} <p class="lead">For more information, please <a href="{% url 'login' %}">create an account</a> or <a href="{% url 'login' %}">log in</a>.</p> {% endif %}
+      {% if user.is_authenticated %}{% else %} <p class="lead">For more information, please <a href="{% url 'login' %}">create an account</a> or <a href="{% url 'login' %}">log in</a>.</p> {% endif %}
     </div>
   </div>
 </div>
