@@ -12,3 +12,4 @@ The features included on this site are:
 *Users can see all posts written by a user by clicking on thier name
 *Users can search posts
 ## Live site: [IMTwitter](https://imtwitter.mdevstix.com)
+## Curious about my process? Check out: [Reflections](https://mbeche.github.io/imt/app-reflection.html)
